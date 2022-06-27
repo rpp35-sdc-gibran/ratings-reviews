@@ -2,10 +2,11 @@ CREATE TABLE review (
   id SERIAL NOT NULL PRIMARY KEY,
   product_id INT NOT NULL,
   rating VARCHAR,
+  date NUMERIC,
   summary VARCHAR,
   body VARCHAR,
-  recommend VARCHAR,
-  reported VARCHAR,
+  recommend BOOLEAN,
+  reported BOOLEAN,
   reviewer_name VARCHAR,
   reviewer_email VARCHAR,
   response VARCHAR,
@@ -35,5 +36,7 @@ CREATE TABLE char_reviews (
 COPY review FROM '/Users/chloe/Desktop/HackReactor/SDC/reviews.csv' WITH (FORMAT csv);
 
 
-\COPY review(id, product_id, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) from '/Users/chloe/Desktop/HackReactor/SDC/reviews.csv' CSV HEADER DELIMITER ',';
+\COPY review FROM '/Users/chloe/Desktop/HackReactor/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
+
+CREATE INDEX product_id_index ON characteristics_csv(product_id);
 
